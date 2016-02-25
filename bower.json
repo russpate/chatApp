@@ -7,7 +7,7 @@
   "main": "",
   "moduleType": [],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/russpate/chatApp",
   "ignore": [
     "**/.*",
     "node_modules",
