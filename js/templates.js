@@ -1,18 +1,18 @@
 var templates = {};
 
-templates.userBox = [
-  "<div class='userBox'>",
-    "<h3>",
-    '<%= username %>',
-    "</h3>",
-  "</div>"
-].join("");
+// templates.userBox = [
+//   "<div class='userBox'>",
+//     "<h3>",
+//     "<%= username %>",
+//     "</h3>",
+//   "</div>"
+// ].join("");
 
 templates.messageBox = [
   "<div class='messageBox'>",
-    "<h2>",
-    '<%= username %>',
-    "</h2>",
+    // "<h2>",
+    // "<%= username %>",
+    // "</h2>",
     "<div class='message'>",
     '<%= content %>',
     "</div>",
@@ -20,4 +20,4 @@ templates.messageBox = [
   "</div>"
 ].join("");
 
-templates.newUser = [].join("");
+// templates.newUser = [].join("");
