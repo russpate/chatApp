@@ -8,3 +8,6 @@ templates.userBox = [
     "<button class='edit'>Edit</button>",
   "</div>"
 ].join("");
+
+templates.chatBox = [].join("");
+tempaltes.newUser = [].join("");
