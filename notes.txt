@@ -1,0 +1,28 @@
+templates:
+  - templates.newUser
+  - templates.userBox
+  - templates.chatBox *
+
+click events:
+  - submit username
+  - submit new chat
+  - click to delete
+
+functions:
+  - display multiple views
+    .section: username input
+    .section: chatBox
+  - add new user to data (AJAX: POST)
+  - add current users to userBox (AJAX: GET)
+  - add new chats to data (AJAX: POST)
+  - add new chats to chatBox (AJAX: GET)
+  - delete posts from chatBox (AJAX: DELETE)
+
+functions explained as features:
+  - login as a new user
+  - all active users displayed on page
+  - all users can remotely input messages that can
+    viewed by all users
+  - created messages can be deleted
+
+* = complete ! = issues $ = in progress
