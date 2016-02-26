@@ -6,8 +6,7 @@ $(document).ready(function() {
     // data.push(userAnswer);
     // $('.userBox h3').text(userNameAnswer);
 
-    // ** needs to be updated for  our project
-  myBlog.init();
+  data.init();
 });
 
 var chatApp = {
@@ -15,8 +14,8 @@ var chatApp = {
   url: 'http://tiny-tiny.herokuapp.com/collections/',
     // ** needs to be updated for  our project
   init: function(){
-    myBlog.initEvents();
-    myBlog.initStyling();
+    data.initEvents();
+    data.initStyling();
   },
     // ** needs to be updated for  our project
   initStyle: function(){
