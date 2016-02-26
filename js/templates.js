@@ -10,4 +10,4 @@ templates.userBox = [
 ].join("");
 
 templates.chatBox = [].join("");
-tempaltes.newUser = [].join("");
+templates.newUser = [].join("");
