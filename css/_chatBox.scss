@@ -1,0 +1,17 @@
+.box{
+  .messageContainer{
+    background-color: white;
+    display: flex;
+    border-bottom: 2px solid $lightGrey;
+    padding: 2%;
+    button{
+    }
+    p{
+      flex: 2;
+      margin-left: 3%;
+    }
+  }
+}
+.msgBox{
+  display: flex;
+}

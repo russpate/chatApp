@@ -1,23 +1,16 @@
 var templates = {};
 
-// templates.userBox = [
-//   "<div class='userBox'>",
-//     "<h3>",
-//     "<%= username %>",
-//     "</h3>",
-//   "</div>"
-// ].join("");
 
-templates.messageBox = [
-  "<div class='messageBox'>",
-    // "<h2>",
-    // "<%= username %>",
-    // "</h2>",
-    "<div class='message'>",
-    '<%= content %>',
-    "</div>",
-    "<button></button>",
-  "</div>"
+
+templates.msgBox = [
+
+    // '<div data-idx="<%= _id %>">',
+    '<div class="msgBox">',
+    '<h5><%= username %></h5>',
+    '<p><%= msg %></p>',
+    '<% if (obj.username === localStorage.getItem("user")){%>',
+    '<button type="button" name="Delete" class="delete-post">x</button>',
+    '<%}%>',
+    '</div>'
+
 ].join("");
-
-// templates.newUser = [].join("");

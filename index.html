@@ -10,32 +10,29 @@
   </head>
   <body>
 
-    <section class="current">
-        <form class="welcome">
-          <input type="text" placeholder="create a username" name="welcome">
-          <button type="submit"></button>
-        </form>
-    </section>
+  <div id='main'>
+
+    <div class="userBox">
+      <h1>Chatterday</h1>
+        <div id="usersName"></div>
+        <button class="signOut"><i class="fa fa-sign-out"></i></button>
+
+    </div>
 
 
-    <section>
+    <div class="messageContainer"></div>
 
-      <div class="chatBox">
-        <div class='messageBox'>
-          <h2>
-          username
-          </h2>
-          <div class='message'>
-           content
-          </div>
-          <button></button>
-        </div>
-        <form>
-          <input type="text" name="messages" placeholder="start chatting">
-        </form>
-      </div>
 
-    </section>
+    <div class='submitMsg'>
+        <input name="msg" type="text" placeholder="send message...">
+        <button class="submit"><i class="fa fa-plus"></i></button>
+    </div>
+
+  </div>
+
+
+
+
     <script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="js/templates.js"></script>

@@ -1,27 +1,55 @@
-.current {
-  display: flex; }
+body {
+  background-color: #F5F5F5;
+  font-family: "Raleway", sans-serif;
+  color: #E5D6D6; }
 
-section {
-  display: none; }
-
-aside {
-  flex: 1;
-  background: lightblue; }
+#main {
+  width: 65%;
+  display: flex;
+  flex-flow: column;
+  background: white;
+  margin: 0 auto; }
 
 .userBox {
   display: flex;
-  justify-content: center; }
+  justify-content: space-between; }
 
-.chatBox {
-  flex: 2;
-  background: lightgrey;
+h1 {
+  font-size: 45px;
+  flex: 1; }
+
+#usersName {
+  align-self: center; }
+
+.signOut {
+  background-color: white;
+  border: none; }
+
+.box .messageContainer {
+  background-color: white;
   display: flex;
-  flex-flow: column;
-  align-items: center; }
-  .chatBox .messageBox {
-    background: white;
-    width: 70%;
-    margin: 0 auto; }
-  .chatBox input {
-    margin-top: 3%;
-    width: 50%; }
+  border-bottom: 2px solid #F5F5F5;
+  padding: 2%; }
+  .box .messageContainer p {
+    flex: 2;
+    margin-left: 3%; }
+
+.msgBox {
+  display: flex; }
+
+.submitMsg {
+  border-top: 1px solid #E2E2E2; }
+
+input {
+  font-size: 17px;
+  padding: 2%;
+  border-radius: 1%;
+  border: none;
+  width: 85.48%; }
+
+.submit {
+  border: none;
+  background: none;
+  width: 10%; }
+  .submit i {
+    font-size: 22px; }
