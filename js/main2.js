@@ -10,7 +10,7 @@ var usersName = localStorage.getItem('user');
   localStorage.setItem('user',usersName);
    $('#usersName').html("<span>" + usersName + "</span>");
 } else {
-  usersName = localStorage.getItem('user')
+  usersName = localStorage.getItem('user');
    $('#usersName').html("<span>" + usersName + "</span>");
 }
 
@@ -26,27 +26,9 @@ $('.signOut').on('click', function(event){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //EMPTY todo ARRAY
 var chatArray = [
-]
+];
 
 //GRABBING THE todo IN THE INPUT ON THE DOM
 //THIS RETURNS AN OBJECT
@@ -55,7 +37,7 @@ function getMsgFromDom() {
   return {
     msg: msg,
     username: usersName
-  }
+  };
 }
 
 //ADDING THE NEW todo TO THE EMPTY ARRAY
@@ -72,7 +54,7 @@ function getMsg() {
 //STRUCTURE FOR ADDING THE NEW ARRAY TO THE DOM
 function addMsgToDom(newMsg, templateStr, $target) {
     var tmpl = _.template(templateStr);
-    $target.prepend(tmpl(newMsg));
+    $target.append(tmpl(newMsg));
 }
 
 
@@ -94,11 +76,10 @@ function deleteTodo(idx) {
 
 //STYLING IN JAVASCIRPT
 function cssStyle($target, attr, property){
-  $target.css(attr, property)};
+  $target.css(attr, property);}
 
 //PREVENT DEFAULT
 function prevent(){event.preventDefault();}
-
 
 
 
@@ -162,7 +143,7 @@ $('footer').on('click', '.active', function (event) {
     _.each(completed, function (el, idx) {
       el.idx = idx;
       addTodoToDom(el, templates.todo, $('.todoContainer'));
-    })
+    });
   }
   addAllTodos(completed);
 });
@@ -182,7 +163,7 @@ $('footer').on('click', '.completed', function (event) {
     _.each(completed, function (el, idx) {
       el.idx = idx;
       addTodoToDom(el, templates.todo, $('.todoContainer'));
-    })
+    });
   }
   addAllTodos(completed);
 });

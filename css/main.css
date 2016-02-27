@@ -1,3 +1,8 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box; }
+
 body {
   background-color: #F5F5F5;
   font-family: "Raleway", sans-serif;
@@ -12,7 +17,8 @@ body {
 
 .userBox {
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+  padding: 0px 20px; }
 
 h1 {
   font-size: 45px;
@@ -35,7 +41,20 @@ h1 {
     margin-left: 3%; }
 
 .msgBox {
-  display: flex; }
+  display: flex;
+  position: relative;
+  padding: 20px 0; }
+  .msgBox span {
+    margin-right: 10px;
+    color: black; }
+
+button.delete-post {
+  position: absolute;
+  right: 10px;
+  -webkit-appearance: none;
+  outline: none;
+  background: none;
+  border: none; }
 
 .submitMsg {
   border-top: 1px solid #E2E2E2; }
@@ -45,7 +64,8 @@ input {
   padding: 2%;
   border-radius: 1%;
   border: none;
-  width: 85.48%; }
+  width: 100%;
+  outline: none; }
 
 .submit {
   border: none;
@@ -53,3 +73,9 @@ input {
   width: 10%; }
   .submit i {
     font-size: 22px; }
+
+button.submit {
+  display: none; }
+
+.messageContainer {
+  padding: 20px; }

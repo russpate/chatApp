@@ -14,4 +14,18 @@
 }
 .msgBox{
   display: flex;
+  position:relative;
+  padding:20px 0;
+  span {
+    margin-right: 10px;
+    color:black;
+  }
+}
+button.delete-post {
+    position: absolute;
+    right: 10px;
+    -webkit-appearance: none;
+    outline: none;
+    background: none;
+    border: none;
 }
