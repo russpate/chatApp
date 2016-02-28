@@ -1,6 +1,9 @@
+
+
 $(document).ready(function() {
   chatApp.init();
   chatApp.end();
+   setInterval(function(){chatApp.getMsg();}, 1000);
 });
 
 //GETTING USERNAME FROM LOCAL STORAGE
@@ -14,9 +17,11 @@ var usersName = localStorage.getItem('user');
    $('#usersName').html("<span>" + usersName + "</span>");
 }
 
+
 var chatArray = [];
 
 var chatApp = {
+  // window.setTimeout(chatApp.addMsg, 2000);
   url: 'http://tiny-tiny.herokuapp.com/collections/main',
   init: function() {
     chatApp.styling();
