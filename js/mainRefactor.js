@@ -81,6 +81,7 @@ addAllMsg: function(arr) {
   _.each(arr, function (el) {
     var tmpl = _.template(templates.msgBox);
     $('.messageContainer').prepend(tmpl(el));
+     $('.messageContainer').scrollTop($('.messageContainer')[0].scrollHeight);
   });
 },
 
