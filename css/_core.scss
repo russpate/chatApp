@@ -5,31 +5,45 @@
 }
 
 body{
-  background-color: $backgroundGrey;
-  font-family: $cool;
-  color: $lightRed;
+  background-color: #F7F7F7;
+  font-family: 'Source Code Pro', sans-serif ;
 }
 #main{
   width: 65%;
   display: flex;
   flex-flow: column;
-  background: white;
   margin: 0 auto;
+  margin-top:20px;
+  color:white;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius:5px;
 }
 
 .userBox{
   display: flex;
   justify-content: space-between;
-  padding:0px 20px;
+  padding:20px;
+  background:rgba(255,255,255,0.1);
+  color:#646C79;
 }
 h1{
 font-size: 45px;
 flex: 1;
+margin:0;
+padding:0;
+color:#646C79;
 }
 #usersName{
   align-self: center;
 }
 .signOut{
-  background-color: white;
+  background-color: rgba(0,0,0,0);
   border: none;
+  margin-left: 10px;
+  outline:none;
+  color:#646C79;
+  transition:.2s all;
+  &:hover{
+    color:#B92828;
+  }
 }

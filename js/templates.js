@@ -4,9 +4,9 @@ templates.msgBox = [
     // '<div data-idx="<%= _id %>">',
     '<div class="msgBox">',
     // '<h5><%= username %></h5>',
-    '<span><%= username %></span><p><%= msg %></p>',
+    '<div class="username"><%= username %></div><div class="message"><p><%= msg %></p></div>',
     '<% if (obj.username === localStorage.getItem("user")){%>',
-    '<button type="button" name="Delete" class="delete-post">x</button>',
+    '<button type="button" name="Delete" class="delete-post"><i class="fa fa-trash-o"></i></button>',
     '<%}%>',
     '</div>'
 ].join("");
