@@ -71,7 +71,7 @@ function end(){ addAllMsg(getMsg());}
 
 //DELETING todo
 function deleteTodo(idx) {
-  toDo.splice(idx, 1);
+  chatArray.splice(idx, 1);
 }
 
 //STYLING IN JAVASCIRPT
@@ -117,7 +117,8 @@ $(document).ready(function () {
     });
 
 //CLICK DELETE THAT DELETES todo AND CHANGE NUMBER OF ITEMS
-  $('.todoContainer').on('click', '.delete', function (event) {
+  $('.messageContainer').on('click', 'button', function (event) {
+    console.log('click');
     prevent();
     var idx = $(this).closest('div').data('idx');
     deleteTodo(idx);
