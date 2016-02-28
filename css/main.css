@@ -15,7 +15,8 @@ body {
   margin-top: 20px;
   color: white;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 5px; }
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px -5px #E0E0E0; }
 
 .userBox {
   display: flex;
@@ -57,12 +58,13 @@ h1 {
 
 .username {
   margin-right: 10px;
-  color: rgba(0, 0, 0, 0.35);
+  color: #3465B5;
   width: inherit;
-  padding: 20px; }
+  padding: 20px;
+  padding-right: 5px; }
 
 .message {
-  width: 77.9%;
+  width: 80.9%;
   display: inline-block;
   word-wrap: break-word;
   color: #646C79; }
@@ -84,17 +86,25 @@ button.delete-post {
 .messageContainer {
   max-height: 300px;
   overflow: scroll;
-  background: white; }
+  background: white;
+  box-shadow: inset 0px -6px 10px -5px #E0E0E0; }
+
+.submitMsg {
+  padding: 20px; }
 
 input {
   font-size: 17px;
   padding: 2%;
-  border-radius: 1%;
-  border: none;
+  border-radius: 3px;
+  border: 1px solid #E0E1E2;
   width: 100%;
   outline: none;
-  background: rgba(0, 0, 0, 0.1);
-  color: #646C79; }
+  background: none;
+  color: #646C79;
+  transition: .2s all; }
+  input:focus {
+    box-shadow: inset 0px 0px 3px 0px #ECECEC;
+    background: #FFFFFF; }
 
 input[type="text"]::-webkit-input-placeholder {
   color: #646C79; }

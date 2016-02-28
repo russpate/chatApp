@@ -1,15 +1,21 @@
 .submitMsg{
+  padding:20px;
 }
-
 input{
   font-size: 17px;
   padding: 2%;
-  border-radius: 1%;
-  border: none;
+  border-radius: 3px;
+  border: 1px solid #E0E1E2;
   width: 100%;
   outline:none;
-  background: rgba(0,0,0,.1);
+  background:none;
+  // background: rgba(0,0,0,.1);
   color:#646C79;
+  transition:.2s all;
+  &:focus {
+    box-shadow: inset 0px 0px 3px 0px #ECECEC;
+    background: #FFFFFF;
+  }
 }
 input[type="text"]::-webkit-input-placeholder{
   color:#646C79;

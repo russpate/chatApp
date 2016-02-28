@@ -167,4 +167,15 @@ $('footer').on('click', '.completed', function (event) {
   }
   addAllTodos(completed);
 });
+// // adds a shadow to the message box with the user has to scroll
+// // from this fiddle: http://jsfiddle.net/KVpBE/
+// $('.messageContainer').scroll(function() {
+//     var scroll = $('.messageContainer').scrollTop();
+//     if (scroll > 0) {
+//         $(".messageContainer").addClass("overflow");
+//     }
+//     else {
+//         $(".messageContainer").removeClass("overflow");
+//     }
+// });
 });
