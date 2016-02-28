@@ -8,6 +8,9 @@
   display: flex;
   position:relative;
   border-bottom: 1px solid rgba(0,0,0,.1);
+  &:last-child{
+    border-bottom:2px solid rgba(0, 0, 0, 0.16);
+  }
   p{
     padding:20px;
   }
@@ -15,7 +18,7 @@
 .username{
   margin-right: 10px;
   color:#3465B5;
-  width:inherit;
+  width:20%;
   padding:20px;
   padding-right:5px;
 }
@@ -35,18 +38,18 @@ button.delete-post {
     font-size: 12px;
     color: #B92828;
     transition:.2s all;
+    // background:rgba(0,0,0,0.03);
     &:hover{
       color:#fff;
       background:#B92828;
     }
 }
 .messageContainer{
-  // display: flex;
-  // min-height:100px;
   max-height: 300px;
   overflow: scroll;
   background:white;
-  box-shadow: inset 0px -6px 10px -5px #E0E0E0;
+  box-shadow: inset 0px 5px 4px -5px #B3B2B2;
+  border-top: 1px solid gainsboro;
 }
 // .overflow{
 //   box-shadow: inset 0px -6px 10px -5px #E0E0E0;

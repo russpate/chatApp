@@ -58,7 +58,7 @@ var chatApp = {
     return {
       msg: msg,
       username: usersName
-    }
+    };
   },
 
   deleteMsgFromDom: function (event) {
@@ -98,7 +98,7 @@ getMsg: function() {
       },
       error: function (err) {
       }
-    })
+    });
   },
 
   deleteMsg: function (postId) {

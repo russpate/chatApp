@@ -16,8 +16,8 @@ body{
   margin-top:20px;
   color:white;
   border: 1px solid rgba(0,0,0,.1);
-  border-radius:5px;
-  box-shadow: 0px 4px 10px -5px #E0E0E0;
+  // border-radius:5px;
+  // box-shadow: 0px 4px 10px -5px #E0E0E0;
 }
 
 .userBox{
@@ -28,7 +28,7 @@ body{
   color:#646C79;
 }
 h1{
-font-size: 45px;
+font-size: 36px;
 flex: 1;
 margin:0;
 padding:0;
@@ -42,9 +42,12 @@ color:#646C79;
   border: none;
   margin-left: 10px;
   outline:none;
-  color:#646C79;
+  color:rgba(0,0,0,0.5);
   transition:.2s all;
+  width:5%;
+  border-radius:100%;
   &:hover{
     color:#B92828;
+    // color:rgba(0,0,0,0.5);
   }
 }
