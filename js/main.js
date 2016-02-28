@@ -1,103 +1,118 @@
-// /*jshint ignore: start */
+
 
 $(document).ready(function() {
   chatApp.init();
+  chatApp.addAllMsg(chatApp.getMsg());
+   setInterval(function(){chatApp.getMsg();}, 2000);
 });
 
-var chatApp = {
-  url: 'http://tiny-tiny.herokuapp.com/collections/chatAppThree',
-  init: function(){
-    chatApp.initEvent();
-    chatApp.initStyle();
-  },
-  initStyle: function(){
-    // chatApp.getUserName();
-  },
-  initEvent: function(){
-    // $('form').on('click','button',chatApp.postUserNameToDatabase);
-    $('form').on('click','button',chatApp.submitUserName);
-    $('.chatBox').find('form').on('submit',chatApp.postMessageToDatabase);
-  },
-  //UTILITY FUNCTIONS
-      //get username from input
-  getFromPrompt: function(){
-    var userNameAnswer = $('form').children('input[name="welcome"]').val();
-    localStorage.setItem('username', userNameAnswer);
-  },
-    //add username to page
-  addUserNameToPage: function(newUserName,tmplStr, $target){
-    var tmpl = _.template(tmplStr);
-    $target.append(tmpl(newUserName));
-  },
-    //add multiple usernames to page
-  addAllUserNamesToPage: function(arr) {
-    $('aside').html('');
-      _.each(arr, function (el) {
-      chatApp.addUserNameToPage(el, templates.userBox, $('aside'));
-    });
-  },
-  //adding new username to database and posting everything to page
-data: [],
+//GETTING USERNAME FROM LOCAL STORAGE
+var usersName = localStorage.getItem('user');
+  if (usersName === null){
+  usersName = prompt("Enter Username");
+  localStorage.setItem('user',usersName);
+   $('#usersName').html("<span>" + usersName + "</span>");
+} else {
+  usersName = localStorage.getItem('user');
+   $('#usersName').html("<span>" + usersName + "</span>");
+}
 
-submitUserName: function(){
-  event.preventDefault();
-  chatApp.addUserNameToPage({username: localStorage.getItem('username')}, templates.userBox, $('aside'));
-  chatApp.getFromPrompt();
-  $(this).parents().removeClass('current');
-  $(this).parents().siblings().addClass('current');
+
+var chatArray = [];
+
+
+//STARTING OBJECT LITTERAL
+var chatApp = {
+  url: 'http://tiny-tiny.herokuapp.com/collections/main',
+  init: function() {
+    chatApp.styling();
+    chatApp.events();
+  },
+  styling: function(){
+    chatApp.getMsg();
+  },
+  events: function(){
+    $('.submit').on('click', chatApp.submitMsg);
+    $('.signOut').on('click', chatApp.signOut);
+    $('.messageContainer').on('click', 'button', chatApp.deleteMsgFromDom );
+
+  },
+
+  submitMsg: function (event) {
+    chatApp.prevent();
+    var newMsg = chatApp.getMsgFromDom();
+      chatApp.addMsg(newMsg);
+      $('input').val('');
+  },
+
+  signOut: function(event){
+    localStorage.clear('user',usersName);
+    usersName = prompt("Enter Username");
+    localStorage.setItem('user',usersName);
+     $('#usersName').html("<span>" + usersName + "</span>");
+  },
+
+//UTILITY FUNCTIONS
+  getMsgFromDom: function () {
+    var msg = $('input[name="msg"]').val();
+    return {
+      msg: msg,
+      username: usersName
+    }
+  },
+
+  deleteMsgFromDom: function (event) {
+  var postId = $(this).closest('.msgBox').data('postid');
+  chatApp.deleteMsg(postId);
+  chatApp.addAllMsg();
 },
 
-    //start chatting
-  getFromInput: function(){
-    var userMessage = $('.chatBox').closest('input[name="messages"]').val();
-    console.log("user message: ", userMessage);
-    var user = localStorage.getItem('username');
-    return{
-      content: userMessage,
-      username: user
-    };
-  },
-    //add message to page
-  addMessageToPage: function(newMessage,tmplStr, $target){
-    var tmpl = _.template(tmplStr);
-    $target.append(tmpl(newMessage));
-  },
-    //add multiple messages to page
-  addAllMessagesToPage: function(arr) {
-    $('.chatBox').html('');
-      _.each(arr, function (el) {
-      chatApp.addMessageToPage(el, templates.messageBox, $('.chatBox'));
-    });
-  },
-  //adding new message to database and posting everything to page
-postMessageToDatabase: function(event) {
-  event.preventDefault();
-  var message = chatApp.getFromInput();
+addAllMsg: function(arr) {
+  $('.messageContainer').html('');
+  _.each(arr, function (el) {
+    var tmpl = _.template(templates.msgBox);
+    $('.messageContainer').prepend(tmpl(el));
+     $('.messageContainer').scrollTop($('.messageContainer')[0].scrollHeight);
+  });
+},
+
+getMsg: function() {
   $.ajax({
     url: chatApp.url,
-    method: 'POST',
-    data: message,
-    success: function(data) {
-      chatApp.data.push(data);
-      chatApp.addAllMessagesToPage(chatApp.data);
+    method: 'GET',
+    success: function (msg) {
+      chatApp.addAllMsg(msg);
     },
-    error: function() {
-      console.log(data);
+    error: function (err) {
     }
   });
 },
-  getMessage: function(){
+
+  addMsg: function(newMsg) {
     $.ajax({
-      url:  chatApp.url,
-      method: 'GET',
-      success: function(response){
-        chatApp.data = response;
-        chatApp.addAllMessagesToPage(chatApp.data);
+      url: 'http://tiny-tiny.herokuapp.com/collections/main',
+      method: 'POST',
+      data: newMsg,
+      success: function (response) {
+        chatApp.getMsg();
       },
-      error: function(err) {
+      error: function (err) {
+      }
+    })
+  },
+
+  deleteMsg: function (postId) {
+    $.ajax({
+      url: chatApp.url + '/' + postId,
+      method: 'DELETE',
+      success: function (response) {
+        chatApp.getMsg();
       }
     });
+  },
+
+  prevent: function(){
+    event.preventDefault();
   }
 
-
-}; // end var chatApp
+};
