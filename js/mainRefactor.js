@@ -80,7 +80,7 @@ addAllMsg: function(arr) {
   $('.messageContainer').html('');
   _.each(arr, function (el) {
     var tmpl = _.template(templates.msgBox);
-    $('.messageContainer').append(tmpl(el));
+    $('.messageContainer').prepend(tmpl(el));
   });
 },
 
