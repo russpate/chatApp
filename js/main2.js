@@ -26,11 +26,11 @@ $('.signOut').on('click', function(event){
 
 
 
-//EMPTY todo ARRAY
+//EMPTY CHAT ARRAY
 var chatArray = [
 ];
 
-//GRABBING THE todo IN THE INPUT ON THE DOM
+//GRABBING THE MSG IN THE INPUT ON THE DOM
 //THIS RETURNS AN OBJECT
 function getMsgFromDom() {
   var msg = $('input[name="msg"]').val();
@@ -40,12 +40,12 @@ function getMsgFromDom() {
   };
 }
 
-//ADDING THE NEW todo TO THE EMPTY ARRAY
+//ADDING THE NEW MSG TO THE EMPTY ARRAY
 function addMsg(newMsg) {
   chatArray.push(newMsg);
 }
 
-//GRABBING THE NEW ARRAY WITH NEW todo IN IT
+//GRABBING THE NEW ARRAY WITH NEW MSG IN IT
 //THIS REUTRNS AN ARRAY
 function getMsg() {
   return chatArray;
@@ -58,7 +58,7 @@ function addMsgToDom(newMsg, templateStr, $target) {
 }
 
 
-//ADDING ALL THE todos TO THE DOM
+//ADDING ALL THE MSGS TO THE DOM
 function addAllMsg(arr) {
   $('.messageContainer').html('');
   _.each(getMsg(), function (el) {
@@ -69,8 +69,8 @@ function addAllMsg(arr) {
 //END FUNCTION
 function end(){ addAllMsg(getMsg());}
 
-//DELETING todo
-function deleteTodo(idx) {
+//DELETING MSG
+function deleteMsg(idx) {
   chatArray.splice(idx, 1);
 }
 
@@ -99,75 +99,17 @@ $(document).ready(function () {
       end();
   });
 
-//CLICKING THE COMPLETED BUTTON
-//CHANGING COMPLETE FALSE TO TRUE
-    $('body').on('click', '.complete', function (event) {
-      prevent();
-      var indexOfOurTodo = $(this).parent().data('idx');
-      toDo[indexOfOurTodo].complete = !toDo[indexOfOurTodo].complete;
-      if(!toDo[indexOfOurTodo].complete) {
-        $(this).removeClass('line');
-        $(this).siblings('p').css('text-decoration', 'none');
-      } else {
-        $(this).addClass('line');
-        $(this).siblings('p').css('text-decoration', 'line-through');
-      }
-      end();
 
-    });
-
-//CLICK DELETE THAT DELETES todo AND CHANGE NUMBER OF ITEMS
+//CLICK DELETE THAT DELETES MSG AND CHANGE NUMBER OF ITEMS
   $('.messageContainer').on('click', 'button', function (event) {
     console.log('click');
     prevent();
     var idx = $(this).closest('div').data('idx');
-    deleteTodo(idx);
+    deleteMsg(idx);
     end();
   });
 
-//CLICK CLEAR ALL AND CLEARS ALL COMPLETED
-  $('footer').on('click', '.clear', function (event) {
-    prevent();
-    var completed = _.where(toDo,{complete: true});
-    completed.forEach(function(el) {
-      deleteTodo(toDo.indexOf(el));
-    });
-    end();
-  });
 
-//CLICK ACTIVE BUTTON AND ONLY SHOW ACTIVE ITEMS
-$('footer').on('click', '.active', function (event) {
-  prevent();
-  var completed = _.where(toDo,{complete: false});
-  function addAllTodos(arr) {
-    $('.todoContainer').html('');
-    _.each(completed, function (el, idx) {
-      el.idx = idx;
-      addTodoToDom(el, templates.todo, $('.todoContainer'));
-    });
-  }
-  addAllTodos(completed);
-});
-
-//CLICK ALL AND SHOWS ALL ITEMS THAT ARE COMPLETED AND ACTIVE
-$('footer').on('click', '.all', function (event) {
-  prevent();
-    end();
-});
-
-//CLICK COMPLETED BUTTON AND ONLY SHOWS COMPLETED
-$('footer').on('click', '.completed', function (event) {
-  prevent();
-  var completed = _.where(toDo,{complete: true});
-  function addAllTodos(arr) {
-    $('.todoContainer').html('');
-    _.each(completed, function (el, idx) {
-      el.idx = idx;
-      addTodoToDom(el, templates.todo, $('.todoContainer'));
-    });
-  }
-  addAllTodos(completed);
-});
 // // adds a shadow to the message box with the user has to scroll
 // // from this fiddle: http://jsfiddle.net/KVpBE/
 // $('.messageContainer').scroll(function() {

@@ -2,7 +2,8 @@ $(document).ready(function() {
   chatApp.init();
   chatApp.end();
 });
-var chatArray = [];
+
+//GETTING USERNAME FROM LOCAL STORAGE
 var usersName = localStorage.getItem('user');
   if (usersName === null){
   usersName = prompt("Enter Username");
@@ -12,7 +13,11 @@ var usersName = localStorage.getItem('user');
   usersName = localStorage.getItem('user');
    $('#usersName').html("<span>" + usersName + "</span>");
 }
+
+var chatArray = [];
+
 var chatApp = {
+  url: 'http://tiny-tiny.herokuapp.com/collections/main',
   init: function() {
     chatApp.styling();
     chatApp.events();
@@ -20,101 +25,108 @@ var chatApp = {
   styling: function(){
   },
   events: function(){
-    $('.submit').on('click', function (event) {
-      prevent();
-      var newMsg = chatApp.getMsgFromDom();
-        chatApp.addMsg(newMsg);
-        $('input[name="msg"]').val('');
-        end();
-    });
-    $('.signOut').on('click', function(event){
-      localStorage.clear('user',usersName);
-      usersName = prompt("Enter Username");
-      localStorage.setItem('user',usersName);
-       $('#usersName').html("<span>" + usersName + "</span>");
-    });
-    $('body').on('click', '.complete', function (event) {
-      prevent();
-      var indexOfOurTodo = $(this).parent().data('idx');
-      toDo[indexOfOurTodo].complete = !toDo[indexOfOurTodo].complete;
-      if(!toDo[indexOfOurTodo].complete) {
-        $(this).removeClass('line');
-        $(this).siblings('p').css('text-decoration', 'none');
-      } else {
-        $(this).addClass('line');
-        $(this).siblings('p').css('text-decoration', 'line-through');
-      }
-      end();
-    });
-    $('.todoContainer').on('click', '.delete', function (event) {
-      prevent();
-      var idx = $(this).closest('div').data('idx');
-      chatApp.deleteTodo(idx);
-      end();
-    });
+    $('.submit').on('click', chatApp.submitMsg);
+    $('.signOut').on('click', chatApp.signOut);
+    $('.messageContainer').on('click', 'button', chatApp.deleteMsgFromDom );
 
-    $('footer').on('click', '.active', function (event) {
-      chatApp.prevent();
-      var completed = _.where(toDo,{complete: false});
-      function addAllTodos(arr) {
-        $('.todoContainer').html('');
-        _.each(completed, function (el, idx) {
-          el.idx = idx;
-          chatApp.addTodoToDom(el, templates.todo, $('.todoContainer'));
-        });
-      }
-      chatApp.addAllTodos(completed);
-    });
-    $('footer').on('click', '.all', function (event) {
-      prevent();
-        end();
-    });
-    $('footer').on('click', '.completed', function (event) {
-      chatApp.prevent();
-      var completed = _.where(toDo,{complete: true});
-      function addAllTodos(arr) {
-        $('.todoContainer').html('');
-        _.each(completed, function (el, idx) {
-          el.idx = idx;
-          chatApp.addTodoToDom(el, templates.todo, $('.todoContainer'));
-        });
-      }
-      chatApp.addAllTodos(completed);
-    });
-  }, // end of events:
+  },
+
+  submitMsg: function (event) {
+    chatApp.prevent();
+    var newMsg = chatApp.getMsgFromDom();
+      chatApp.addMsg(newMsg);
+      $('input').val('');
+      // $('input[name="msg"]').val('');
+      // chatApp.end();
+  },
+
+  signOut: function(event){
+    localStorage.clear('user',usersName);
+    usersName = prompt("Enter Username");
+    localStorage.setItem('user',usersName);
+     $('#usersName').html("<span>" + usersName + "</span>");
+  },
+
+
+
+
+
+
+
+
+
+
 
   getMsgFromDom: function () {
     var msg = $('input[name="msg"]').val();
     return {
       msg: msg,
       username: usersName
-    };
+    }
   },
+
+  deleteMsgFromDom: function (event) {
+  var postId = $(this).closest('.msgBox').data('postid');
+  chatApp.deleteMsg(postId);
+  chatApp.addAllMsg();
+},
+
+addAllMsg: function(arr) {
+  $('.messageContainer').html('');
+  _.each(arr, function (el) {
+    var tmpl = _.template(templates.msgBox);
+    $('.messageContainer').append(tmpl(el));
+  });
+},
+
+getMsg: function() {
+  $.ajax({
+    url: chatApp.url,
+    method: 'GET',
+    success: function (msg) {
+      console.log(msg);
+      chatApp.addAllMsg(msg);
+    },
+    error: function (err) {
+      console.log(err);
+    }
+  });
+},
+
+
+
   addMsg: function(newMsg) {
-    chatArray.push(newMsg);
+    $.ajax({
+      url: 'http://tiny-tiny.herokuapp.com/collections/main',
+      method: 'POST',
+      data: newMsg,
+      success: function (response) {
+        chatApp.getMsg();
+      },
+      error: function (err) {
+        console.log("error", err);
+      }
+    })
   },
-  getMsg: function() {
-    return chatArray;
-  },
-  addMsgToDom: function(newMsg, templateStr, $target) {
-      var tmpl = _.template(templateStr);
-      $target.append(tmpl(newMsg));
-  },
-  addAllMsg: function(arr) {
-    $('.messageContainer').html('');
-    _.each(chatApp.getMsg(), function (el) {
-      chatApp.addMsgToDom(el, templates.msgBox, $('.messageContainer'));
+
+
+  deleteMsg: function (postId) {
+    console.log("http://tiny-tiny.herokuapp.com/collections/main" + '/' + postId);
+    $.ajax({
+      url: chatApp.url + '/' + postId,
+      method: 'DELETE',
+      success: function (response) {
+        chatApp.getMsg();
+      }
     });
   },
-  end: function(){ chatApp.addAllMsg(chatApp.getMsg());
-  },
-  deleteTodo: function(idx) {
-    toDo.splice(idx, 1);
-  },
-  cssStyle: function($target, attr, property){
-    $target.css(attr, property);
-  },
-  prevent: function(){event.preventDefault();
+
+
+end: function(){ chatApp.addAllMsg(chatApp.getMsg());
+},
+
+  prevent: function(){
+    event.preventDefault();
   }
 
 }; // end var chatApp
